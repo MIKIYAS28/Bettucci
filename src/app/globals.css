@@ -13,8 +13,9 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(180deg, #f8efe1 0%, #efe2c8 100%);
-  color: #1c1410;
+  background: linear-gradient(180deg, #14100d 0%, #1a1410 100%);
+  color: #f4ecd8;
+  font-feature-settings: 'kern' 1;
 }
 
 * {
@@ -27,10 +28,36 @@ a {
 }
 
 ::selection {
-  background: rgba(212, 175, 55, 0.35);
-  color: #241611;
+  background: rgba(201, 162, 39, 0.35);
+  color: #f4ecd8;
 }
 
+/* Tangerine drop-cap effect for hero and major headlines */
+.text-display {
+  font-family: var(--font-tangerine);
+  font-size: clamp(2.5rem, 8vw, 8rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+/* Drop cap for first letter in Tangerine display */
+.drop-cap-gold::first-letter {
+  font-size: 1.25em;
+  color: #c9a227;
+  filter: drop-shadow(0 0 8px rgba(201, 162, 39, 0.6));
+}
+
+/* Gold glow effect for interactive elements */
+.gold-glow {
+  transition: all 0.3s ease;
+}
+
+.gold-glow:hover {
+  filter: drop-shadow(0 0 12px rgba(201, 162, 39, 0.5));
+}
+
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -45,3 +72,19 @@ a {
     scroll-behavior: auto !important;
   }
 }
+
+/* Focus states */
+:focus-visible {
+  outline: 2px solid #c9a227;
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #c9a227;
+  outline-offset: 2px;
+}
+

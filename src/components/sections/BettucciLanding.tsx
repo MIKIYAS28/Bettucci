@@ -1,7 +1,10 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
+import { ReservationFlow } from './ReservationFlow';
+import { ParticleGlow } from './ParticleGlow';
 import heroImage from '../../../bettucci.jpg';
 
 const highlights = [
@@ -9,43 +12,35 @@ const highlights = [
     title: 'Lasagna',
     label: 'Popular',
     src: 'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=900&q=80',
-    alt: 'Layered lasagna plated on a white dish',
   },
   {
     title: 'Tiramisu',
     label: 'Popular',
     src: 'https://images.unsplash.com/photo-1571877227200-a0d98ea4f3b8?auto=format&fit=crop&w=900&q=80',
-    alt: 'Tiramisu served with cocoa powder',
   },
   {
     title: 'Beef',
     src: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80',
-    alt: 'Seared beef steak with roasted vegetables',
   },
   {
     title: 'Chicken Cutlet',
     src: 'https://images.unsplash.com/photo-1563379091331-03b5c4d5f0e7?auto=format&fit=crop&w=900&q=80',
-    alt: 'Crispy chicken cutlet plated with greens',
   },
   {
     title: 'Caesar Salad',
     src: 'https://images.unsplash.com/photo-1546793665-c74683f339c1?auto=format&fit=crop&w=900&q=80',
-    alt: 'Fresh caesar salad with parmesan',
   },
   {
     title: 'Chicken Pizza',
     src: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80',
-    alt: 'Chicken pizza fresh from the oven',
   },
   {
     title: 'Four Cheese Pizza',
-    src: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80',
-    alt: 'Pizza topped with four cheeses',
+    src: 'https://images.unsplash.com/photo-1556910103-1c02745acea4?auto=format&fit=crop&w=900&q=80',
   },
   {
     title: 'Pizza Caprese',
-    src: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80',
-    alt: 'Pizza caprese on a wooden board',
+    src: 'https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=900&q=80',
   },
 ];
 
@@ -119,313 +114,357 @@ const reviews = [
 const revealProps = {
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.6, ease: 'easeOut' },
+  viewport: { once: true, amount: 0.15 },
+  transition: { duration: 0.7, ease: 'easeOut' },
 };
 
 export function BettucciLanding() {
+  const [reservationOpen, setReservationOpen] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <main className="overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(212,175,55,0.16),_transparent_48%)]">
-      <section id="top" className="relative isolate overflow-hidden bg-espresso px-4 py-6 text-parchment sm:px-6 lg:px-8 lg:py-8">
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(0,0,0,0.8),rgba(36,22,17,0.88))]" />
-        <Image
-          src={heroImage}
-          alt="The Bettucci sign in warm candlelit tones"
-          fill
-          priority
-          className="object-cover object-center opacity-25"
-        />
-        <div className="relative mx-auto flex max-w-7xl flex-col gap-8 lg:min-h-[85vh] lg:justify-center">
-          <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
-            animate={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="mb-8 flex flex-wrap items-center gap-3"
-          >
-            <span className="rounded-full border border-gold/40 bg-white/10 px-3 py-1 text-[0.7rem] uppercase tracking-[0.35em] text-gold-soft">
-              Addis Ababa • Ethio-Italiano
-            </span>
-            <span className="rounded-full border border-ethio-green/40 bg-ethio-green/15 px-3 py-1 text-[0.7rem] uppercase tracking-[0.35em] text-parchment">
-              4.5 ★ · 217 reviews
-            </span>
-          </motion.div>
+    <>
+      <main className="overflow-hidden">
+        {/* Hero */}
+        <section id="hero" className="relative isolate min-h-screen w-full">
+          {/* Hero image with overlay */}
+          <Image
+            src={heroImage}
+            alt="Bettucci candlelit courtyard with fairy lights"
+            fill
+            priority
+            className="object-cover object-center"
+            quality={90}
+          />
 
-          <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-            <motion.div
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-              animate={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="max-w-3xl"
-            >
-              <p className="mb-4 text-sm uppercase tracking-[0.4em] text-gold-soft">Ristorante & Pizzeria</p>
-              <h1 className={`${'font-display'} text-5xl leading-[0.95] text-gold sm:text-6xl lg:text-8xl`}>
-                Bettucci
-              </h1>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-parchment/85 sm:text-xl">
-                Candlelit Italian plates, a warm Ethiopian spirit, and a dining room made for lingering.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
+          {/* Gradient overlay (noir to transparent) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-noir/70 via-noir/50 to-noir/30" />
+
+          {/* Particle glow effect */}
+          <ParticleGlow />
+
+          {/* Content */}
+          <div className="relative flex min-h-screen flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl text-center">
+              {/* Eyebrow */}
+              <motion.div
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <span className="font-heading text-sm uppercase tracking-[0.35em] text-gold-light">
+                  Ristorante & Pizzeria · Addis Ababa
+                </span>
+              </motion.div>
+
+              {/* Headline in Tangerine with drop-cap */}
+              <motion.div
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="mt-4"
+              >
+                <h1 className="text-display text-gold drop-cap-gold">Bettucci</h1>
+              </motion.div>
+
+              {/* Rating & Price badge */}
+              <motion.div
+                initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                className="mt-6 flex flex-col items-center gap-2 sm:flex-row sm:justify-center"
+              >
+                <span className="rounded-full border border-gold/40 bg-white/10 px-4 py-2 text-sm font-semibold text-ivory">
+                  4.5 ★ • 217 reviews
+                </span>
+                <span className="rounded-full border border-gold/40 bg-white/10 px-4 py-2 text-sm font-semibold text-gold">
+                  ETB 2,000+ per person
+                </span>
+              </motion.div>
+
+              {/* CTAs */}
+              <motion.div
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                className="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-center"
+              >
+                <button
+                  onClick={() => setReservationOpen(true)}
+                  className="rounded-lg bg-gold px-8 py-4 font-semibold text-noir transition hover:bg-gold-light hover:shadow-[0_0_24px_rgba(201,162,39,0.5)]"
+                >
+                  Book a Table
+                </button>
                 <a
                   href="#menu"
-                  className="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-espresso transition hover:-translate-y-1 hover:bg-gold-soft focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-espresso"
+                  className="rounded-lg border border-gold/40 px-8 py-4 font-semibold text-ivory transition hover:border-gold/70 hover:bg-white/10"
                 >
                   View Menu
                 </a>
-                <a
-                  href="https://maps.google.com/?q=XQX6%2BCC%20Addis%20Ababa"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full border border-parchment/30 px-6 py-3 text-sm font-semibold text-parchment transition hover:-translate-y-1 hover:border-gold-soft focus:outline-none focus:ring-2 focus:ring-gold-soft focus:ring-offset-2 focus:ring-offset-espresso"
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Highlights strip */}
+        <motion.section {...revealProps} className="bg-noir px-4 py-8 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-6">
+              <p className="font-heading text-xs uppercase tracking-[0.4em] text-gold-light">Signature Dishes</p>
+              <h2 className="mt-2 text-2xl text-ivory sm:text-3xl">What guests keep returning for</h2>
+            </div>
+            <div className="flex gap-4 overflow-x-auto pb-2 sm:pb-4">
+              {highlights.map((item) => (
+                <motion.article
+                  key={item.title}
+                  whileHover={shouldReduceMotion ? undefined : { y: -4 }}
+                  transition={{ duration: 0.2 }}
+                  className="group relative min-w-[200px] overflow-hidden rounded-xl border border-gold/20 shadow-lg transition sm:min-w-[240px]"
                 >
-                  Get Directions
-                </a>
-              </div>
-              <div className="mt-8 flex flex-wrap gap-4 text-sm text-parchment/80">
-                <div className="rounded-full border border-white/10 bg-white/10 px-4 py-2">ETB 2,000+ per person</div>
-                <div className="rounded-full border border-white/10 bg-white/10 px-4 py-2">Dine-in • Takeaway • Delivery</div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={shouldReduceMotion ? false : { opacity: 0, x: 24 }}
-              animate={shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.35 }}
-              className="rounded-[2rem] border border-white/10 bg-[rgba(36,22,17,0.75)] p-5 shadow-[0_30px_80px_rgba(0,0,0,0.3)] backdrop-blur"
-            >
-              <div className="mb-4 flex items-center justify-between">
-                <div>
-                  <p className="text-[0.7rem] uppercase tracking-[0.35em] text-gold-soft">Tonight’s note</p>
-                  <p className="mt-2 font-serif text-2xl text-parchment">A table for two, candlelit.</p>
-                </div>
-                <div className="rounded-full border border-gold/40 px-3 py-2 text-sm font-semibold text-gold">Open 12 PM</div>
-              </div>
-              <div className="space-y-3 text-sm leading-7 text-parchment/75">
-                <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
-                  <p className="font-semibold text-parchment">Signature plates</p>
-                  <p className="mt-1">Lasagna, tiramisu, house-made pizza, and slow-simmered pasta.</p>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
-                  <p className="font-semibold text-parchment">Visit us</p>
-                  <p className="mt-1">Near Flipper International School, Beklobet Lower Secondary Campus, Addis Ababa.</p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      <motion.section {...revealProps} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
-        <div className="flex items-center justify-between gap-3">
-          <div>
-            <p className="text-[0.7rem] uppercase tracking-[0.4em] text-ethio-green">Crowd favorites</p>
-            <h2 className={`${'font-display'} text-2xl text-walnut sm:text-3xl`}>What guests keep coming back for</h2>
-          </div>
-          <div className="hidden rounded-full border border-gold/30 bg-gold/10 px-3 py-2 text-sm text-walnut md:block">
-            Freshly plated • Made to share
-          </div>
-        </div>
-        <div className="mt-6 flex gap-4 overflow-x-auto pb-2">
-          {highlights.map((item, index) => (
-            <motion.article
-              key={item.title}
-              whileHover={{ y: -6, scale: 1.01 }}
-              transition={{ duration: 0.22 }}
-              className="group relative min-w-[220px] overflow-hidden rounded-[1.5rem] border border-[#e7d7b9] bg-parchment shadow-[0_14px_36px_rgba(36,22,17,0.08)]"
-            >
-              <div className="relative h-44 w-full">
-                <Image src={item.src} alt={item.alt} fill className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-espresso/70 to-transparent" />
-                {item.label ? (
-                  <span className="absolute left-3 top-3 rounded-full border border-gold/40 bg-gold px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-espresso">
-                    {item.label}
-                  </span>
-                ) : null}
-              </div>
-              <div className="p-4">
-                <p className="font-serif text-xl text-walnut">{item.title}</p>
-                <p className="mt-2 text-sm leading-6 text-charcoal-text/70">Seasoned with care and served with warmth.</p>
-              </div>
-            </motion.article>
-          ))}
-        </div>
-      </motion.section>
-
-      <motion.section id="menu" {...revealProps} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
-        <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <p className="text-[0.7rem] uppercase tracking-[0.4em] text-ethio-green">Menu</p>
-            <h2 className={`${'font-display'} text-3xl text-walnut sm:text-4xl`}>The dishes that lead the room</h2>
-          </div>
-          <p className="max-w-2xl text-sm leading-7 text-charcoal-text/70">
-            From wood-fired pizzas to silky pastas and sharp salads, every plate is built to feel both familiar and elevated.
-          </p>
-        </div>
-        <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
-          {menuCategories.map((category) => (
-            <motion.article
-              key={category.title}
-              whileHover={{ y: -4, boxShadow: '0 18px 40px rgba(36,22,17,0.1)' }}
-              transition={{ duration: 0.2 }}
-              className="rounded-[1.75rem] border border-[#ede0c6] bg-white/80 p-6 shadow-[0_12px_30px_rgba(36,22,17,0.05)]"
-            >
-              <div className="mb-5 flex items-center justify-between">
-                <h3 className={`${'font-display'} text-2xl text-walnut`}>{category.title}</h3>
-                <div className="h-px flex-1 bg-gradient-to-r from-gold/70 to-transparent" />
-              </div>
-              <div className="space-y-4">
-                {category.items.map((item) => (
-                  <div key={item.name} className="rounded-2xl border border-transparent bg-[#fcf7ee] p-4 transition hover:border-gold/40 hover:bg-[#fff9ef]">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <p className="font-serif text-xl text-walnut">{item.name}</p>
-                        <p className="mt-1 text-sm leading-6 text-charcoal-text/65">{item.description}</p>
-                      </div>
-                      <span className="shrink-0 text-sm font-semibold text-wine">{item.price}</span>
-                    </div>
+                  <div className="relative h-48 w-full">
+                    <Image src={item.src} alt={item.title} fill className="object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-noir/80 via-noir/40 to-transparent" />
+                    {item.label ? (
+                      <motion.span
+                        initial={{ x: -20, opacity: 0 }}
+                        whileInView={{ x: 0, opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                        className="absolute left-3 top-3 rounded-full bg-gold px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-noir"
+                      >
+                        {item.label}
+                      </motion.span>
+                    ) : null}
                   </div>
-                ))}
-              </div>
-            </motion.article>
-          ))}
-        </div>
-      </motion.section>
-
-      <motion.section id="about" {...revealProps} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
-        <div className="grid gap-8 rounded-[2rem] border border-[#e8ddc6] bg-[#fbf6eb] p-6 shadow-[0_16px_40px_rgba(36,22,17,0.05)] lg:grid-cols-[1.05fr_0.95fr] lg:p-10">
-          <div className="flex flex-col justify-center">
-            <p className="text-[0.7rem] uppercase tracking-[0.4em] text-ethio-green">About</p>
-            <h2 className={`${'font-display'} mt-3 text-3xl text-walnut sm:text-4xl`}>An Italian kitchen with an Ethiopian heart</h2>
-            <p className="mt-5 text-lg leading-8 text-charcoal-text/75">
-              Bettucci was built as a place where old-world Italian hospitality meets the warmth and generosity of Addis Ababa. The result is a dining room that feels intimate, lively, and deeply rooted in both cultures.
-            </p>
-            <p className="mt-4 text-lg leading-8 text-charcoal-text/75">
-              Expect candlelit dinners, carefully made pasta, wood-fired pizzas, and a service style that feels personal from the first hello to the final sip.
-            </p>
-          </div>
-          <div className="relative overflow-hidden rounded-[1.75rem] border border-[#e6d7b7]">
-            <Image
-              src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80"
-              alt="A warm Italian restaurant dining scene with pizza and candles"
-              width={900}
-              height={700}
-              className="h-full min-h-[300px] w-full object-cover"
-            />
-          </div>
-        </div>
-      </motion.section>
-
-      <motion.section id="reviews" {...revealProps} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
-        <div className="rounded-[2rem] border border-[#e8ddc6] bg-espresso p-6 text-parchment shadow-[0_18px_50px_rgba(36,22,17,0.15)] lg:p-10">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <p className="text-[0.7rem] uppercase tracking-[0.4em] text-gold-soft">Reviews</p>
-              <h2 className={`${'font-display'} text-3xl text-gold sm:text-4xl`}>Loved by locals and travelers alike</h2>
-            </div>
-            <div className="rounded-full border border-gold/30 bg-white/10 px-4 py-2 text-sm">
-              4.5 ★ average from 217 reviews · 5★ majority
-            </div>
-          </div>
-          <div className="mt-8 overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/10 p-2">
-            <div className="flex w-max animate-marquee gap-4">
-              {[...reviews, ...reviews].map((review, index) => (
-                <article key={`${review.name}-${index}`} className="w-[290px] rounded-[1.25rem] border border-white/10 bg-[#2f2018] p-5">
-                  <div className="flex items-center justify-between text-sm text-gold-soft">
-                    <span>{review.rating}</span>
-                    <span className="rounded-full border border-gold/30 px-2 py-1 text-[0.65rem] uppercase tracking-[0.25em]">
-                      {review.badge}
-                    </span>
+                  <div className="bg-stone/50 p-4 backdrop-blur">
+                    <p className="font-heading text-lg italic text-gold">{item.title}</p>
                   </div>
-                  <p className="mt-4 text-sm leading-7 text-parchment/80">“{review.quote}”</p>
-                  <p className="mt-5 font-semibold text-parchment">{review.name}</p>
-                </article>
+                </motion.article>
               ))}
             </div>
           </div>
-        </div>
-      </motion.section>
+        </motion.section>
 
-      <motion.section id="location" {...revealProps} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
-        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="rounded-[2rem] border border-[#e8ddc6] bg-white/80 p-6 shadow-[0_16px_40px_rgba(36,22,17,0.05)] lg:p-8">
-            <p className="text-[0.7rem] uppercase tracking-[0.4em] text-ethio-green">Location</p>
-            <h2 className={`${'font-display'} mt-3 text-3xl text-walnut sm:text-4xl`}>Visit us in Addis Ababa</h2>
-            <p className="mt-5 text-lg leading-8 text-charcoal-text/75">
-              Near Flipper International School Beklobet Lower Secondary Campus, Addis Ababa.
-            </p>
-            <div className="mt-6 space-y-3 text-sm leading-7 text-charcoal-text/70">
-              <div className="rounded-2xl border border-[#efe2ca] bg-[#fcf7ee] p-4">
-                <p className="font-semibold text-walnut">Hours</p>
-                <p className="mt-1">Opens 12 PM daily • Late evening service available</p>
-              </div>
-              <div className="rounded-2xl border border-[#efe2ca] bg-[#fcf7ee] p-4">
-                <p className="font-semibold text-walnut">Phone</p>
-                <p className="mt-1">099 116 2244</p>
-              </div>
-              <div className="mt-4 flex flex-wrap gap-2">
-                <span className="rounded-full border border-ethio-green/20 bg-ethio-green/10 px-3 py-1 text-sm text-ethio-green">Dine-in</span>
-                <span className="rounded-full border border-gold/20 bg-gold/10 px-3 py-1 text-sm text-walnut">Takeaway</span>
-                <span className="rounded-full border border-wine/20 bg-wine/10 px-3 py-1 text-sm text-wine">No-contact delivery</span>
-              </div>
-            </div>
-            <a
-              href="https://maps.google.com/?q=XQX6%2BCC%20Addis%20Ababa"
-              target="_blank"
-              rel="noreferrer"
-              className="mt-6 inline-flex rounded-full bg-gold px-5 py-3 text-sm font-semibold text-espresso transition hover:-translate-y-1 hover:bg-gold-soft"
-            >
-              Get Directions
-            </a>
-          </div>
-          <div className="overflow-hidden rounded-[2rem] border border-[#e8ddc6] shadow-[0_16px_40px_rgba(36,22,17,0.05)]">
-            <iframe
-              title="Bettucci location map"
-              src="https://www.google.com/maps?q=XQX6%2BCC%20Addis%20Ababa&z=14&output=embed"
-              className="h-[420px] w-full"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </motion.section>
-
-      <motion.section id="contact" {...revealProps} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
-        <div className="rounded-[2rem] border border-[#e6d8bc] bg-espresso p-6 text-parchment shadow-[0_18px_50px_rgba(36,22,17,0.18)] lg:p-10">
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-            <div>
-              <p className="text-[0.7rem] uppercase tracking-[0.4em] text-gold-soft">Contact</p>
-              <h2 className={`${'font-display'} mt-3 text-3xl text-gold sm:text-4xl`}>Reserve a table or send a note</h2>
-              <p className="mt-4 max-w-xl text-base leading-8 text-parchment/70">
-                Whether you are planning a dinner out or want to discuss a private event, the team is ready to welcome you.
+        {/* Menu */}
+        <motion.section id="menu" {...revealProps} className="bg-noir px-4 py-12 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10">
+              <p className="font-heading text-xs uppercase tracking-[0.4em] text-gold-light">Menu</p>
+              <h2 className="mt-2 text-3xl text-ivory sm:text-4xl">Crafted with care</h2>
+              <p className="mt-3 max-w-2xl text-ivory/70">
+                From wood-fired pizzas to hand-rolled pasta, every plate reflects our commitment to authentic Italian tradition with Addis Ababa warmth.
               </p>
-              <div className="mt-6 space-y-3 text-sm text-parchment/75">
-                <p>Phone: 099 116 2244</p>
-                <p>Instagram • Facebook • TikTok</p>
-                <p>Open daily from 12 PM</p>
+            </div>
+            <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
+              {menuCategories.map((category) => (
+                <motion.article
+                  key={category.title}
+                  whileHover={shouldReduceMotion ? undefined : { y: -4 }}
+                  transition={{ duration: 0.2 }}
+                  className="rounded-xl border border-gold/20 bg-stone p-6 shadow-lg transition hover:shadow-[0_0_20px_rgba(201,162,39,0.3)]"
+                >
+                  <h3 className="font-heading text-xl italic text-gold">{category.title}</h3>
+                  <div className="mt-4 space-y-3">
+                    {category.items.map((item) => (
+                      <div key={item.name} className="border-b border-gold/10 pb-3 last:border-0 last:pb-0">
+                        <div className="flex items-start justify-between gap-2">
+                          <div>
+                            <p className="font-heading text-sm italic text-ivory">{item.name}</p>
+                            <p className="mt-0.5 text-xs text-ivory/60">{item.description}</p>
+                          </div>
+                          <p className="shrink-0 text-sm font-semibold text-gold-light">{item.price}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </motion.section>
+
+        {/* About */}
+        <motion.section {...revealProps} className="bg-stone px-4 py-12 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+              <div>
+                <p className="font-heading text-xs uppercase tracking-[0.4em] text-gold-light">About Us</p>
+                <h2 className="mt-3 text-3xl text-ivory sm:text-4xl">Italian craft, Ethiopian soul</h2>
+                <p className="mt-4 leading-7 text-ivory/75">
+                  Bettucci is born from a simple belief: that great food brings people together, and that the warmth of hospitality transcends borders.
+                </p>
+                <p className="mt-3 leading-7 text-ivory/75">
+                  Here in Addis Ababa, we blend authentic Italian traditions—hand-rolled pasta, wood-fired pizzas, slow-simmered sauces—with the generosity and soul that define Ethiopian dining culture. The result is a restaurant that feels both rooted in Tuscany and deeply at home in this city.
+                </p>
+              </div>
+              <motion.div
+                initial={{ opacity: 0, x: 24 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+                className="relative overflow-hidden rounded-xl border border-gold/20 shadow-lg"
+              >
+                <Image
+                  src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80"
+                  alt="Warm Italian restaurant ambiance with candlelight"
+                  width={900}
+                  height={700}
+                  className="h-[400px] w-full object-cover"
+                />
+              </motion.div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Reviews */}
+        <motion.section {...revealProps} className="bg-noir px-4 py-12 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10">
+              <p className="font-heading text-xs uppercase tracking-[0.4em] text-gold-light">Reviews</p>
+              <h2 className="mt-2 text-3xl text-ivory sm:text-4xl">Loved by locals</h2>
+              <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-ivory/70">
+                <span className="flex items-center gap-1">
+                  <span className="text-lg text-gold">★</span> 4.5 average rating
+                </span>
+                <span>217 reviews</span>
+                <span className="h-1 w-1 rounded-full bg-gold/40" />
+                <span>5★ is most common</span>
               </div>
             </div>
-            <form className="rounded-[1.5rem] border border-white/10 bg-white/10 p-5 backdrop-blur">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="text-sm">
-                  <span className="mb-2 block text-parchment/80">Name</span>
-                  <input className="w-full rounded-2xl border border-white/10 bg-[#2f2018] px-4 py-3 text-parchment outline-none ring-0 focus:border-gold/60" placeholder="Your name" />
-                </label>
-                <label className="text-sm">
-                  <span className="mb-2 block text-parchment/80">Phone</span>
-                  <input className="w-full rounded-2xl border border-white/10 bg-[#2f2018] px-4 py-3 text-parchment outline-none focus:border-gold/60" placeholder="099 000 0000" />
-                </label>
-              </div>
-              <label className="mt-4 block text-sm">
-                <span className="mb-2 block text-parchment/80">Message</span>
-                <textarea className="min-h-[120px] w-full rounded-2xl border border-white/10 bg-[#2f2018] px-4 py-3 text-parchment outline-none focus:border-gold/60" placeholder="Tell us about your evening, celebration, or table request." />
-              </label>
-              <button className="mt-5 rounded-full bg-gold px-5 py-3 text-sm font-semibold text-espresso transition hover:-translate-y-1 hover:bg-gold-soft focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-espresso">
-                Send Inquiry
-              </button>
-            </form>
+
+            <div className="flex w-full gap-4 overflow-x-auto pb-4">
+              {[...reviews, ...reviews].map((review, index) => (
+                <motion.article
+                  key={`${review.name}-${index}`}
+                  whileHover={shouldReduceMotion ? undefined : { y: -4 }}
+                  transition={{ duration: 0.2 }}
+                  className="min-w-[300px] rounded-xl border border-gold/20 bg-stone p-6 shadow-lg transition"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-semibold text-gold">{review.rating}</span>
+                    <span className="text-[0.65rem] uppercase tracking-[0.2em] text-gold-light">{review.badge}</span>
+                  </div>
+                  <p className="mt-4 leading-6 text-ivory/75">"{review.quote}"</p>
+                  <p className="mt-4 font-semibold text-ivory">— {review.name}</p>
+                </motion.article>
+              ))}
+            </div>
           </div>
-        </div>
-      </motion.section>
-    </main>
+        </motion.section>
+
+        {/* Location */}
+        <motion.section {...revealProps} className="bg-stone px-4 py-12 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="grid gap-8 lg:grid-cols-2">
+              <div>
+                <p className="font-heading text-xs uppercase tracking-[0.4em] text-gold-light">Location</p>
+                <h2 className="mt-3 text-3xl text-ivory sm:text-4xl">Visit us in Addis Ababa</h2>
+                <div className="mt-6 space-y-4">
+                  <div className="rounded-lg border border-gold/20 bg-noir/50 p-4">
+                    <p className="text-xs uppercase tracking-[0.3em] text-gold-light">Address</p>
+                    <p className="mt-2 text-ivory">Near Flipper International School, Beklobet Lower Secondary Campus</p>
+                  </div>
+                  <div className="rounded-lg border border-gold/20 bg-noir/50 p-4">
+                    <p className="text-xs uppercase tracking-[0.3em] text-gold-light">Hours</p>
+                    <p className="mt-2 text-ivory">Opens 12 PM daily • Late evening service available</p>
+                  </div>
+                  <div className="rounded-lg border border-gold/20 bg-noir/50 p-4">
+                    <p className="text-xs uppercase tracking-[0.3em] text-gold-light">Phone</p>
+                    <p className="mt-2 text-ivory font-mono">099 116 2244</p>
+                  </div>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    <span className="inline-flex rounded-full border border-gold/20 bg-gold/10 px-3 py-1.5 text-xs font-semibold text-gold">
+                      Dine-in
+                    </span>
+                    <span className="inline-flex rounded-full border border-gold/20 bg-gold/10 px-3 py-1.5 text-xs font-semibold text-gold">
+                      Takeaway
+                    </span>
+                    <span className="inline-flex rounded-full border border-gold/20 bg-gold/10 px-3 py-1.5 text-xs font-semibold text-gold">
+                      No-contact delivery
+                    </span>
+                  </div>
+                  <a
+                    href="https://maps.google.com/?q=XQX6%2BCC%20Addis%20Ababa"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-6 inline-flex rounded-lg bg-gold px-6 py-3 font-semibold text-noir transition hover:bg-gold-light"
+                  >
+                    Get Directions
+                  </a>
+                </div>
+              </div>
+              <div className="overflow-hidden rounded-xl border border-gold/20 shadow-lg">
+                <iframe
+                  title="Bettucci location on Google Maps"
+                  src="https://www.google.com/maps?q=XQX6%2BCC%20Addis%20Ababa&z=15&output=embed"
+                  className="h-[400px] w-full"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Contact / Footer */}
+        <motion.section {...revealProps} className="bg-noir px-4 py-12 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="rounded-xl border border-gold/20 bg-stone p-8 shadow-lg sm:p-10">
+              <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+                <div>
+                  <p className="font-heading text-xs uppercase tracking-[0.4em] text-gold-light">Contact</p>
+                  <h2 className="mt-3 text-3xl text-gold">Get in touch</h2>
+                  <p className="mt-4 leading-7 text-ivory/75">
+                    Have questions about our menu, want to plan a private event, or just want to say hello? We're here and delighted to hear from you.
+                  </p>
+                  <div className="mt-6 space-y-2 text-sm text-ivory/75">
+                    <p>
+                      <strong className="text-ivory">Phone:</strong> 099 116 2244
+                    </p>
+                    <p>
+                      <strong className="text-ivory">Hours:</strong> Opens 12 PM daily
+                    </p>
+                  </div>
+                </div>
+                <form className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-ivory">Name</label>
+                    <input
+                      type="text"
+                      placeholder="Your name"
+                      className="mt-2 w-full rounded-lg border border-gold/20 bg-noir px-4 py-3 text-ivory placeholder:text-ivory/30 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-ivory">Phone</label>
+                    <input
+                      type="tel"
+                      placeholder="099 000 0000"
+                      className="mt-2 w-full rounded-lg border border-gold/20 bg-noir px-4 py-3 text-ivory placeholder:text-ivory/30 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-ivory">Message</label>
+                    <textarea
+                      placeholder="Tell us about your event or inquiry"
+                      rows={3}
+                      className="mt-2 w-full rounded-lg border border-gold/20 bg-noir px-4 py-3 text-ivory placeholder:text-ivory/30 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full rounded-lg bg-gold px-6 py-3 font-semibold text-noir transition hover:bg-gold-light"
+                  >
+                    Send Message
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+      </main>
+
+      {/* Reservation Flow Modal */}
+      <ReservationFlow isOpen={reservationOpen} onClose={() => setReservationOpen(false)} />
+    </>
   );
 }
