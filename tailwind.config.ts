@@ -5,25 +5,28 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: {
-          50: '#fdf7f0',
-          100: '#f8eadc',
-          200: '#efd3b7',
-          300: '#e3b182',
-          400: '#d68b4a',
-          500: '#c56e2e',
-          600: '#ab5623',
-          700: '#8a4521',
-          800: '#703b21',
-          900: '#5d3220',
-        },
-        accent: {
-          500: '#4b3a2f',
-          700: '#31251f',
-        },
+        espresso: '#241611',
+        walnut: '#3C2415',
+        gold: '#D4AF37',
+        'gold-soft': '#E8C766',
+        'ethio-green': '#0B6E4F',
+        wine: '#7A1F2B',
+        parchment: '#F3EAD8',
+        'charcoal-text': '#1C1410',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        display: ['var(--font-playfair)', 'serif'],
+        heading: ['var(--font-cormorant)', 'serif'],
+        sans: ['var(--font-jost)', 'sans-serif'],
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+      },
+      animation: {
+        marquee: 'marquee 24s linear infinite',
       },
     },
   },

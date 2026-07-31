@@ -3,21 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --color-background: #fcf7f1;
-  --color-surface: #fff8ef;
-  --color-text: #2f241f;
-  --color-muted: #6f5c4e;
-  --color-accent: #c56e2e;
-  --color-accent-strong: #8a4521;
-  --color-border: #e9dccf;
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f6efe6 0%, #f1e6d8 100%);
-  color: var(--color-text);
-  font-family: Inter, Arial, sans-serif;
+  background: linear-gradient(180deg, #f8efe1 0%, #efe2c8 100%);
+  color: #1c1410;
 }
 
 * {
@@ -29,22 +26,22 @@ a {
   text-decoration: none;
 }
 
-@keyframes floatCard {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(-0.5deg);
-  }
-  50% {
-    transform: translateY(-8px) rotate(0.5deg);
-  }
+::selection {
+  background: rgba(212, 175, 55, 0.35);
+  color: #241611;
 }
 
-.ethiopian-card {
-  animation: floatCard 5s ease-in-out infinite;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-.ethiopian-card:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 24px 50px rgba(5, 34, 24, 0.2);
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
