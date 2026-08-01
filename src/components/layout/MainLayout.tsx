@@ -1,32 +1,38 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import heroImage from '../../../bettucci.jpg';
 
 const navItems = [
-  { href: '#menu', label: 'Menu' },
-  { href: '#about', label: 'About' },
-  { href: '#reviews', label: 'Reviews' },
-  { href: '#location', label: 'Location' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/', label: 'Home' },
+  { href: '/menu', label: 'Menu' },
+  { href: '/about', label: 'About' },
+  { href: '/reservation', label: 'Reservation' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export function MainLayout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
-  // Track scroll to update nav style
-  if (typeof window !== 'undefined') {
-    // Note: This is a simplified approach. In production, consider using a proper scroll event listener.
-    if (window.scrollY > 100 && !scrolled) {
-      setScrolled(true);
-    } else if (window.scrollY <= 100 && scrolled) {
-      setScrolled(false);
-    }
-  }
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 100);
+    };
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
     <div className="min-h-screen bg-noir">
@@ -43,7 +49,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
           {/* Logo */}
           <Link href="#hero" className="flex items-center gap-2" onClick={() => setOpen(false)}>
             <div className="relative h-9 w-9 overflow-hidden rounded-full border border-gold/40 bg-stone/80 p-0.5">
-              <Image src={heroImage} alt="Bettucci sign" fill className="object-cover" />
+              <Image src={heroImage} alt="Bettucci sign" fill sizes="36px" className="object-cover" />
             </div>
             <span className="font-display text-lg text-gold">Bettucci</span>
           </Link>

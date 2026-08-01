@@ -8,8 +8,8 @@ interface ParticleProps {
 
 function Particle({ index }: ParticleProps) {
   const delay = (index * 0.5) % 3;
-  const x = Math.random() * 100;
-  const duration = 3 + Math.random() * 2;
+  const x = (index % 6) * 16 + 6;
+  const duration = 3 + (index % 4) * 0.6;
 
   return (
     <motion.div

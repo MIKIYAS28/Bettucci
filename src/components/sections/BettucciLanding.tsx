@@ -133,6 +133,7 @@ export function BettucciLanding() {
             alt="Bettucci candlelit courtyard with fairy lights"
             fill
             priority
+            sizes="100vw"
             className="object-cover object-center"
             quality={90}
           />
@@ -222,7 +223,7 @@ export function BettucciLanding() {
                   className="group relative min-w-[200px] overflow-hidden rounded-xl border border-gold/20 shadow-lg transition sm:min-w-[240px]"
                 >
                   <div className="relative h-48 w-full">
-                    <Image src={item.src} alt={item.title} fill className="object-cover" />
+                    <Image src={item.src} alt={item.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-noir/80 via-noir/40 to-transparent" />
                     {item.label ? (
                       <motion.span
