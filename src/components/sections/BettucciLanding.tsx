@@ -284,7 +284,7 @@ export function BettucciLanding() {
         </motion.section>
 
         {/* About */}
-        <motion.section {...revealProps} className="bg-stone px-4 py-12 sm:px-6 lg:px-8">
+        <motion.section id="about" {...revealProps} className="bg-stone px-4 py-12 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
               <div>
@@ -317,7 +317,7 @@ export function BettucciLanding() {
         </motion.section>
 
         {/* Reviews */}
-        <motion.section {...revealProps} className="bg-noir px-4 py-12 sm:px-6 lg:px-8">
+        <motion.section id="reviews" {...revealProps} className="bg-noir px-4 py-12 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="mb-10">
               <p className="font-heading text-xs uppercase tracking-[0.4em] text-gold-light">Reviews</p>
@@ -353,7 +353,7 @@ export function BettucciLanding() {
         </motion.section>
 
         {/* Location */}
-        <motion.section {...revealProps} className="bg-stone px-4 py-12 sm:px-6 lg:px-8">
+        <motion.section id="location" {...revealProps} className="bg-stone px-4 py-12 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="grid gap-8 lg:grid-cols-2">
               <div>
@@ -406,7 +406,7 @@ export function BettucciLanding() {
         </motion.section>
 
         {/* Contact / Footer */}
-        <motion.section {...revealProps} className="bg-noir px-4 py-12 sm:px-6 lg:px-8">
+        <motion.section id="contact" {...revealProps} className="bg-noir px-4 py-12 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="rounded-xl border border-gold/20 bg-stone p-8 shadow-lg sm:p-10">
               <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
