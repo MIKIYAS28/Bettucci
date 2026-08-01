@@ -11,36 +11,36 @@ const highlights = [
   {
     title: 'Lasagna',
     label: 'Popular',
-    src: 'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=900&q=80',
+    src: '/images/1.jpg',
   },
   {
     title: 'Tiramisu',
     label: 'Popular',
-    src: 'https://images.unsplash.com/photo-1571877227200-a0d98ea4f3b8?auto=format&fit=crop&w=900&q=80',
+    src: '/images/2.jpg',
   },
   {
     title: 'Beef',
-    src: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80',
+    src: '/images/3.jpg',
   },
   {
     title: 'Chicken Cutlet',
-    src: 'https://images.unsplash.com/photo-1563379091331-03b5c4d5f0e7?auto=format&fit=crop&w=900&q=80',
+    src: '/images/4.jpg',
   },
   {
     title: 'Caesar Salad',
-    src: 'https://images.unsplash.com/photo-1546793665-c74683f339c1?auto=format&fit=crop&w=900&q=80',
+    src: '/images/5.jpg',
   },
   {
     title: 'Chicken Pizza',
-    src: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80',
+    src: '/images/6.jpg',
   },
   {
     title: 'Four Cheese Pizza',
-    src: 'https://images.unsplash.com/photo-1556910103-1c02745acea4?auto=format&fit=crop&w=900&q=80',
+    src: '/images/7.jpg',
   },
   {
     title: 'Pizza Caprese',
-    src: 'https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?auto=format&fit=crop&w=900&q=80',
+    src: '/images/8.jpg',
   },
 ];
 
@@ -305,7 +305,7 @@ export function BettucciLanding() {
                 className="relative overflow-hidden rounded-xl border border-gold/20 shadow-lg"
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80"
+                  src="/images/9.jpg"
                   alt="Warm Italian restaurant ambiance with candlelight"
                   width={900}
                   height={700}
